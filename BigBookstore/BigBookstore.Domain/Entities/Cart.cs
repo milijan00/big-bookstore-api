@@ -12,6 +12,7 @@ namespace BigBookstore.Domain.Entities
         public Guid UserId { get; set; }
 
         public ICollection<CartItem> Books { get; set; } = new List<CartItem>();
-        public ICollection<User> Users { get; set; } = new List<User>();
+
+        public string Address { get; set; }
     }
 }

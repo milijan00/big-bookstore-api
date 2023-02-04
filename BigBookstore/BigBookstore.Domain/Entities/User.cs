@@ -14,6 +14,6 @@ namespace BigBookstore.Domain.Entities
         public string Password { get; set; }
         public Role Role { get; set; }
         public Guid RoleId { get; set; }
-        public Cart Chart { get; set; }
+        public ICollection<Cart> Carts { get; set; } = new List<Cart>();
     }
 }

@@ -1,2 +1,6 @@
- ./BigBookstore.Domain/obj/
- .//BigBookstore.Domain/obj/Debug
+ ./BigBookstore/BigBookstore.Domain/obj/
+ ./BigBookstore/BigBookstore.Domain/obj/Debug
+ ./BigBookstore/BigBookstore.Persistance/obj/
+ ./BigBookstore/BigBookstore.Persistance/Migrations/
+ ./BigBookstore/BigBookstore.Persistance/obj/Debug
+ ./.vs/
