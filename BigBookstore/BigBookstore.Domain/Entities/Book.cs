@@ -15,7 +15,9 @@ namespace BigBookstore.Domain.Entities
         public Guid CategoryId { get; set; }
         public BindingType BindingType { get; set; }
         public Guid BindingTypeId { get; set; }
-        public uint pages { get; set; }
-        public ICollection<CartItem> Charts { get; set; } = new List<CartItem>();
+        public uint Pages { get; set; }
+        public ICollection<CartItem> Carts { get; set; } = new List<CartItem>();
+        public Letter Letter { get; set; }
+        public Guid LetterId { get; set; }
     }
 }

@@ -8,8 +8,9 @@ namespace BigBookstore.Domain.Entities
 {
     public class BaseEntity
     {
-        Guid Id { get; set; }
+        public Guid Id { get; set; }
+        public bool IsActive { get; set; }
         public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
     }
 }
