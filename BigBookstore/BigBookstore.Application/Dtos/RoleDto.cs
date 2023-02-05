@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BigBookstore.Application.Dtos
 {
-    public class RoleDto
+    public class RoleDto : BaseDto
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

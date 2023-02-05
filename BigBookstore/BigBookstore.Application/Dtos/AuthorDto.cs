@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace BigBookstore.Application.Dtos
 {
-    public class UserDto : BaseDto
+    public class AuthorDto : BaseDto
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
+        public string Name { get; set; }
     }
 }
