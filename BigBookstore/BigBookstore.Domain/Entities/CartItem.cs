@@ -12,5 +12,6 @@ namespace BigBookstore.Domain.Entities
         public Cart Cart { get; set; }
         public Guid BookId { get; set; }
         public Guid CartId { get; set; }
+        public uint Quantity { get; set; }
     }
 }

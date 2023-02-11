@@ -28,6 +28,7 @@ namespace BigBookstore.Persistance
         {
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
             modelBuilder.Entity<CartItem>().HasKey(x => new { x.BookId, x.CartId });
+            modelBuilder.Entity<CartItem>().Property(x => x.Quantity).IsRequired().HasDefaultValue(1);
 
             base.OnModelCreating(modelBuilder);
         }
