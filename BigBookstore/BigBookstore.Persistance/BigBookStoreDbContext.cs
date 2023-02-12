@@ -32,6 +32,28 @@ namespace BigBookstore.Persistance
 
             base.OnModelCreating(modelBuilder);
         }
+        public async  override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            if(this.ChangeTracker.HasChanges())
+            {
+                var entries = this.ChangeTracker.Entries();
+                foreach (var e in entries)
+                {
+                    if(e.State == EntityState.Added)
+                    {
+                        var entity = e.Entity as BaseEntity;
+                        entity.Id = Guid.NewGuid();
+                        entity.IsActive = true;
+                    }
+                    else if(e.State == EntityState.Modified )
+                    {
+                        var entity = e.Entity as BaseEntity;
+                        entity.UpdatedOn = DateTime.UtcNow;
+                    }
+                }
+            }
+            return await base.SaveChangesAsync(cancellationToken);
+        }
 
     }
 }

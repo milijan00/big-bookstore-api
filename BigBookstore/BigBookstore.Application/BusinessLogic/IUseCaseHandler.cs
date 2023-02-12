@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace BigBookstore.Application.BusinessLogic
 {
-    public interface IUseCaseHandler<IUseCase, TResponse> : IRequestHandler<IUseCase<TResponse>, TResponse>
+    public interface IUseCaseHandler<TUseCase, TResponse> : IRequestHandler<TUseCase, TResponse>
+        where TUseCase: IUseCase<TResponse>
     {
-        public IApplicationService ApplicationService { get; set; }
     }
 }
