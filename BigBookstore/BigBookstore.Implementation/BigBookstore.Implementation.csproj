@@ -7,17 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="11.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\BigBookstore.Application\BigBookstore.Application.csproj" />
     <ProjectReference Include="..\BigBookstore.Domain\BigBookstore.Domain.csproj" />
     <ProjectReference Include="..\BigBookstore.Persistance\BigBookstore.Persistance.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="BusinessLogic\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

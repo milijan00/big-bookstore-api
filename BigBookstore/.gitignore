@@ -1,8 +1,10 @@
- ./BigBookstore/BigBookstore.Domain/obj/
+ ./BigBookstore/BigBookstore.Domain/obj
  ./BigBookstore/BigBookstore.Domain/obj/Debug
  ./BigBookstore/BigBookstore.Application/obj/Debug
- ./BigBookstore/BigBookstore.Application/obj/
- ./BigBookstore/BigBookstore.Persistance/obj/
- ./BigBookstore/BigBookstore.Persistance/Migrations/
+ ./BigBookstore/BigBookstore.Application/obj
+ ./BigBookstore/BigBookstore.Persistance/obj
+ ./BigBookstore/BigBookstore.Persistance/Migrations
  ./BigBookstore/BigBookstore.Persistance/obj/Debug
- ./.vs/
+ ./.vs
+ ./BigBookstore/BigBookstore.Implementation/obj
+ ./BigBookstore/BigBookstore.Implementation/obj/Debug
