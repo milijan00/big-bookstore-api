@@ -42,7 +42,6 @@ namespace BigBookstore.Persistance
                     if(e.State == EntityState.Added)
                     {
                         var entity = e.Entity as BaseEntity;
-                        entity.Id = Guid.NewGuid();
                         entity.IsActive = true;
                     }
                     else if(e.State == EntityState.Modified )
