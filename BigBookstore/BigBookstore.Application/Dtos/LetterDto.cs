@@ -7,17 +7,8 @@ using System.Threading.Tasks;
 
 namespace BigBookstore.Application.Dtos
 {
-    public class LetterDto : BaseDto<LetterDto, Letter>
+    public class LetterDto : BaseDto
     {
         public string Name { get; set; }
-
-        public override LetterDto Projection(Letter entity)
-        {
-            return new LetterDto
-            {
-                Id = entity.Id,
-                Name = entity.Name
-            };
-        }
     }
 }

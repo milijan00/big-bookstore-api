@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BigBookstore.Application.BusinessLogic.Authors.Commands
 {
-    public interface IDeletAuthorCommand : ICommand<Unit>
+    public interface IDeleteAuthorCommand : ICommand<Unit>
     {
     }
 }
