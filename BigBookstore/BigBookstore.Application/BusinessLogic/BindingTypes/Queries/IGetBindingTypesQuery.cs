@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BigBookstore.Application.BusinessLogic.BindingTypes.Queries
 {
-    internal interface IGetBindingTypesQuery
+    public interface IGetBindingTypesQuery
     {
     }
 }
