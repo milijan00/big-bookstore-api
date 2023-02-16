@@ -2,6 +2,7 @@
 using BigBookstore.Application.Services;
 using BigBookstore.Domain.Entities;
 using BigBookstore.Implementation.Exceptions;
+using BigBookstore.Implementation.Extensions;
 using BigBookstore.Implementation.Validators;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -64,32 +65,32 @@ namespace BigBookstore.Implementation.BusinessLogic.Books.Commands
                 throw new InvalidOperationException("Both Book and UpdateBookCommand references must not be null.");
             }
 
-            if(request.Name != book.Name)
+            if(request.Name.NotNullOrEmpty() && request.Name != book.Name)
             {
                 book.Name = request.Name;
             }
 
-            if(request.CategoryId != book.CategoryId)
+            if(request.CategoryId.NotEmpty() &&   request.CategoryId != book.CategoryId)
             {
                 book.CategoryId = request.CategoryId;
             }
 
-            if(request.AuthorId != book.AuthorId)
+            if(request.AuthorId.NotEmpty() && request.AuthorId != book.AuthorId)
             {
                 book.AuthorId = request.AuthorId;
             }
 
-            if(request.LetterId != book.LetterId)
+            if(request.LetterId.NotEmpty() && request.LetterId != book.LetterId)
             {
                 book.LetterId = request.LetterId;
             }
             
-            if(request.Image != book.Image)
+            if(request.Image.NotNullOrEmpty() && request.Image != book.Image)
             {
                 book.Image = request.Image;
             }
 
-            if(request.Pages != book.Pages)
+            if(request.Pages > 0 && request.Pages != book.Pages)
             {
                 book.Pages = request.Pages;
             }

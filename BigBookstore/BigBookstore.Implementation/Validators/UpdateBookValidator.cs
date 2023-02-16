@@ -1,4 +1,5 @@
 ﻿using BigBookstore.Implementation.BusinessLogic.Books.Commands;
+using BigBookstore.Implementation.Extensions;
 using BigBookstore.Persistance;
 using FluentValidation;
 using System;
@@ -20,32 +21,33 @@ namespace BigBookstore.Implementation.Validators
 
             RuleFor(x => x.Name)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Book's title must not be null or empty.")
-                .Must(name => Context.Books.Any(x => x.Name == name)).WithMessage("Given title is already taken.");
+                .Must(name => Context.Books.Any(x => x.Name == name))
+                .WithMessage("Given title is already taken.")
+                .When(x => x.Name.NotNullOrEmpty());
 
             RuleFor(x => x.AuthorId)
                 .Cascade(CascadeMode.Stop)
-                .Must(id => id != Guid.Empty).WithMessage("Author's id is invalid.")
-                .Must(id => Context.Authors.Any(x => x.Id == id)).WithMessage("Given author doesn't exist");
+                .Must(id => Context.Authors.Any(x => x.Id == id))
+                .WithMessage("Given author doesn't exist")
+                .When(x => x.AuthorId != Guid.Empty);
 
             RuleFor(x => x.CategoryId)
                 .Cascade(CascadeMode.Stop)
-                .Must(id => id != Guid.Empty).WithMessage("Category's id is invalid.")
-                .Must(id => Context.Categories.Any(x => x.Id == id)).WithMessage("Given category doesn't exist");
+                .Must(id => Context.Categories.Any(x => x.Id == id))
+                .WithMessage("Given category doesn't exist")
+                .When(x => x.CategoryId != Guid.Empty);
 
             RuleFor(x => x.LetterId)
                 .Cascade(CascadeMode.Stop)
-                .Must(id => id != Guid.Empty).WithMessage("Letters's id is invalid.")
-                .Must(id => Context.Letters.Any(x => x.Id == id)).WithMessage("Given letter doesn't exist");
+                .Must(id => Context.Letters.Any(x => x.Id == id))
+                .WithMessage("Given letter doesn't exist")
+                .When(x => x.LetterId != Guid.Empty);
 
             RuleFor(x => x.BindingTypeId)
                 .Cascade(CascadeMode.Stop)
-                .Must(id => id != Guid.Empty).WithMessage("Binding type's id is invalid.")
-                .Must(id => Context.BindingTypes.Any(x => x.Id == id)).WithMessage("Given binding type doesn't exist");
-
-            RuleFor(x => x.Pages)
-                .Must(pages => pages > 0).WithMessage("Number of pages can't be less than or equal to 0");
-        }
+                .Must(id => Context.BindingTypes.Any(x => x.Id == id))
+                .WithMessage("Given binding type doesn't exist")
+                .When(x => x.BindingTypeId != Guid.Empty);
         }
     }
 }
