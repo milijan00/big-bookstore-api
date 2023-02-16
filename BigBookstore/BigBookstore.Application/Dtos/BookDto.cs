@@ -15,6 +15,7 @@ namespace BigBookstore.Application.Dtos
         public string BindingType { get; set; }
         public string Category { get; set; }
         public uint Pages { get; set; }
+        public string  Image { get; set; }
 
     }
 }

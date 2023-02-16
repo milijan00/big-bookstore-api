@@ -19,5 +19,6 @@ namespace BigBookstore.Domain.Entities
         public ICollection<CartItem> Carts { get; set; } = new List<CartItem>();
         public Letter Letter { get; set; }
         public Guid LetterId { get; set; }
+        public string Image { get; set; }
     }
 }

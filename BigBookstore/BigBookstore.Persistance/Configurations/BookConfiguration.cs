@@ -18,6 +18,7 @@ namespace BigBookstore.Persistance.Configurations
             builder.Property(x => x.LetterId).IsRequired();
             builder.Property(x => x.BindingTypeId).IsRequired();
             builder.Property(x => x.CategoryId).IsRequired();
+            builder.Property(x => x.Image).IsRequired();
 
             builder.HasIndex(x => x.Name).IsUnique();
 
