@@ -17,22 +17,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Categories.Commands
         public string Name { get; set; }
     }
 
-    public class CreateCategoryCommandHandler : RequestHandler<CreateCategoryCommand, Unit>
+    public class CreateCategoryCommandHandler : RequestHandlerWithValidator<CreateCategoryCommand, Unit, CreateCategoryValidator>
     {
-        private readonly CreateCategoryValidator validator;
-
-        public CreateCategoryCommandHandler(IApplicationService service, CreateCategoryValidator validator) : base(service)
+        public CreateCategoryCommandHandler(IApplicationService service, CreateCategoryValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateCategoryCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
             var category = new Category
             {
                 Id = Guid.NewGuid(),

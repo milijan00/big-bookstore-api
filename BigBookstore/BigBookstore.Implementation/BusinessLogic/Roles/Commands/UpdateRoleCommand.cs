@@ -18,24 +18,13 @@ namespace BigBookstore.Implementation.BusinessLogic.Roles.Commands
         public string Name { get; set; }
     }
 
-    public class UpdateRoleCommandHandler : RequestHandler<UpdateRoleCommand, Unit>
+    public class UpdateRoleCommandHandler : RequestHandlerWithValidator<UpdateRoleCommand, Unit, UpdateRoleValidator>
     {
-        private readonly UpdateRoleValidator validator;
-
-        public UpdateRoleCommandHandler(IApplicationService service, UpdateRoleValidator validator) : base(service)
+        public UpdateRoleCommandHandler(IApplicationService service, UpdateRoleValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async Task<Unit> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
+        protected override async  Task<Unit> ExecuteOperation(UpdateRoleCommand request)
         {
-            var result = this.validator.Validate(request);
-
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var role = await this.ApplicationService.GetByIdAsync<Role>(request.Id);
             role.Name = request.Name;
             await this.ApplicationService.SaveChangesAsync();

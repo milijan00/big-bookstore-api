@@ -26,29 +26,20 @@ namespace BigBookstore.Implementation.BusinessLogic.Books.Commands
         public string Image { get; set; }
     }
 
-    public class UpdateBookCommandHandler : RequestHandler<UpdateBookCommand, Unit>
+    public class UpdateBookCommandHandler : RequestHandlerWithValidator<UpdateBookCommand, Unit, UpdateBookValidator>
     {
-        private readonly UpdateBookValidator validator;
-
-        public UpdateBookCommandHandler(IApplicationService service, UpdateBookValidator validator) : base(service)
+        public UpdateBookCommandHandler(IApplicationService service, UpdateBookValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
+        protected override async  Task<Unit> ExecuteOperation(UpdateBookCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             Book book = await this.GetBookById(request.Id);
             this.UpdateBooksValues(book, request);
             await this.ApplicationService.SaveChangesAsync();
             return new Unit();
         }
-        
+
         private async  Task<Book> GetBookById(Guid id)
         {
             return await this.ApplicationService.Entity<Book>()

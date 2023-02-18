@@ -15,23 +15,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Letters.Commands
     {
         public string Name { get; set; }
     }
-    public class CreateLetterCommandHandler : RequestHandler<CreateLetterCommand, Unit>
+    public class CreateLetterCommandHandler : RequestHandlerWithValidator<CreateLetterCommand, Unit, CreateLetterValidator>
     {
-        private readonly CreateLetterValidator validator;
-
-        public CreateLetterCommandHandler(IApplicationService service, CreateLetterValidator validator) : base(service)
+        public CreateLetterCommandHandler(IApplicationService service, CreateLetterValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(CreateLetterCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateLetterCommand request)
         {
-            var result = this.validator.Validate(request);
-
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
             var letter = new Domain.Entities.Letter
             {
                 Id = Guid.NewGuid(),

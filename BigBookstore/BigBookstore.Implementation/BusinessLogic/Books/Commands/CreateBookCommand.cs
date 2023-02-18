@@ -23,23 +23,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Books.Commands
         public string Image { get; set; }
     }
 
-    public class CreateBookCommandHandler : RequestHandler<CreateBookCommand, Unit>
+    public class CreateBookCommandHandler : RequestHandlerWithValidator<CreateBookCommand, Unit, CreateBookValidator>
     {
-        private readonly CreateBookValidator validator;
-
-        public CreateBookCommandHandler(IApplicationService service, CreateBookValidator validator) : base(service)
+        public CreateBookCommandHandler(IApplicationService service, CreateBookValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateBookCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var book = new Book()
             {
                 Id = Guid.NewGuid(),

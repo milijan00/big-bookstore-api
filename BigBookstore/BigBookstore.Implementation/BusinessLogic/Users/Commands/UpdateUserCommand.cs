@@ -25,28 +25,19 @@ namespace BigBookstore.Implementation.BusinessLogic.Users.Commands
         public Guid RoleId { get; set;}
     }
 
-    public class UpdateUserCommandHandler : RequestHandler<UpdateUserCommand, Unit>
+    public class UpdateUserCommandHandler : RequestHandlerWithValidator<UpdateUserCommand, Unit, UpdateUserValidator>
     {
-        private readonly UpdateUserValidator validator;
-
-        public UpdateUserCommandHandler(IApplicationService service, UpdateUserValidator validator) : base(service)
+        public UpdateUserCommandHandler(IApplicationService service, UpdateUserValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(UpdateUserCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var user = await this.ApplicationService.GetByIdAsync<User>(request.Id);
             this.UpdateUsersValues(user, request);
             await this.ApplicationService.SaveChangesAsync();
             return new Unit();
         }
+
         private void UpdateUsersValues(User user, UpdateUserCommand request)
         {
             if(request.FirstName.NotNullOrEmpty() && user.Firstname != request.FirstName)

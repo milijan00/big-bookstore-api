@@ -16,23 +16,13 @@ namespace BigBookstore.Implementation.BusinessLogic.Authors.Commands
     {
         public string FullName { get; set; }
     }
-    public class CreateAuthorCommandHandler : RequestHandler<CreateAuthorCommand, Unit>
+    public class CreateAuthorCommandHandler : RequestHandlerWithValidator<CreateAuthorCommand, Unit, CreateAuthorValidator>
     {
-        private readonly CreateAuthorValidator validator;
-
-        public CreateAuthorCommandHandler(IApplicationService service, CreateAuthorValidator validator) : base(service)
+        public CreateAuthorCommandHandler(IApplicationService service, CreateAuthorValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async Task<Unit> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateAuthorCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var author = new Author
             {
                 Id = Guid.NewGuid(),

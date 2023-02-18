@@ -17,22 +17,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Categories.Commands
         public Guid Id { get; set; }
         public string  Name { get; set; }
     }
-    public class UpdateCategoryCommandHandler : RequestHandler<UpdateCategoryCommand, Unit>
+    public class UpdateCategoryCommandHandler : RequestHandlerWithValidator<UpdateCategoryCommand, Unit, UpdateCategoryValidator>
     {
-        private readonly UpdateCategoryValidator validator;
-
-        public UpdateCategoryCommandHandler(IApplicationService service, UpdateCategoryValidator validator) : base(service)
+        public UpdateCategoryCommandHandler(IApplicationService service, UpdateCategoryValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async  Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(UpdateCategoryCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
             var category = await this.ApplicationService.GetByIdAsync<Category>(request.Id);
             category.Name = request.Name;
             await this.ApplicationService.SaveChangesAsync();

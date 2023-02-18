@@ -18,23 +18,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Letters.Commands
         public string Name { get; set; }
     }
 
-    public class UpdateLetterCommandHandler : RequestHandler<UpdateLetterCommand, Unit>
+    public class UpdateLetterCommandHandler : RequestHandlerWithValidator<UpdateLetterCommand, Unit, UpdateLetterValidator>
     {
-        private readonly UpdateLetterValidator validator;
-
-        public UpdateLetterCommandHandler(IApplicationService service, UpdateLetterValidator validator) : base(service)
+        public UpdateLetterCommandHandler(IApplicationService service, UpdateLetterValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(UpdateLetterCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(UpdateLetterCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var letter = await this.ApplicationService.GetByIdAsync<Letter>(request.Id);
             letter.Name = request.Name;
             await this.ApplicationService.SaveChangesAsync();

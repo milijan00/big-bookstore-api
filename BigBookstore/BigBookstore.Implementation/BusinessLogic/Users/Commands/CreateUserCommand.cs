@@ -22,23 +22,13 @@ namespace BigBookstore.Implementation.BusinessLogic.Users.Commands
         public string PasswordAgain { get; set; }
     }
 
-    public class CreateUserCommandHandler : RequestHandler<CreateUserCommand, Unit>
+    public class CreateUserCommandHandler : RequestHandlerWithValidator<CreateUserCommand, Unit, CreateUserValidator>
     {
-        private readonly CreateUserValidator validator;
-
-        public CreateUserCommandHandler(IApplicationService service, CreateUserValidator validator) : base(service)
+        public CreateUserCommandHandler(IApplicationService service, CreateUserValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateUserCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var user = new User()
             {
                 Id = Guid.NewGuid(),

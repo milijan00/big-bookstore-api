@@ -21,7 +21,7 @@ namespace BigBookstore.Implementation.Validators
 
             RuleFor(x => x.FullName)
                 .Cascade(CascadeMode.Stop)
-                .Must(id => id.NotEmpty()).WithMessage("Author's name must not be null or empty.")
+                .NotEmpty().WithMessage("Author's name must not be null or empty.")
                 .Must(name => !Context.Authors.Any(x=> x.Fullname == name)).WithMessage("Author's name is already taken.");
         }
     }

@@ -18,23 +18,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Authors.Commands
         public string FullName { get; set; }
     }
 
-    public class UpdateAuthorCommandHandler : RequestHandler<UpdateAuthorCommand, Unit>
+    public class UpdateAuthorCommandHandler : RequestHandlerWithValidator<UpdateAuthorCommand, Unit, UpdateAuthorValidator>
     {
-        private readonly UpdateAuthorValidator validator;
-
-        public UpdateAuthorCommandHandler(IApplicationService service, UpdateAuthorValidator validator) : base(service)
+        public UpdateAuthorCommandHandler(IApplicationService service, UpdateAuthorValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
+        protected override async  Task<Unit> ExecuteOperation(UpdateAuthorCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var author = await this.ApplicationService.GetByIdAsync<Author>(request.Id);
             author.Fullname = request.FullName;
             await this.ApplicationService.SaveChangesAsync();

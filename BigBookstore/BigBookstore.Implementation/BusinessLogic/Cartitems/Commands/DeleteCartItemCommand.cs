@@ -18,22 +18,13 @@ namespace BigBookstore.Implementation.BusinessLogic.Cartitems.Commands
         public Guid BookId { get; set; }
     }
 
-    public class DeleteCartItemCommandHandler : RequestHandler<DeleteCartItemCommand, Unit>
+    public class DeleteCartItemCommandHandler : RequestHandlerWithValidator<DeleteCartItemCommand, Unit, DeleteCartItemValidator>
     {
-        private readonly DeleteCartItemValidator validator;
-
-        public DeleteCartItemCommandHandler(IApplicationService service, DeleteCartItemValidator validator) : base(service)
+        public DeleteCartItemCommandHandler(IApplicationService service, DeleteCartItemValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async Task<Unit> Handle(DeleteCartItemCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(DeleteCartItemCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
             var cartItem = this.ApplicationService.Entity<CartItem>().First(x => x.CartId == request.CartId && x.BookId == request.BookId);
             this.ApplicationService.Entity<CartItem>().Remove(cartItem);
             await this.ApplicationService.SaveChangesAsync();

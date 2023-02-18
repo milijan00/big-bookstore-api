@@ -17,23 +17,13 @@ namespace BigBookstore.Implementation.BusinessLogic.BindingTypes.Commands
         public string Name { get; set; }
     }
 
-    public class CreateBindingTypeCommandHandler : RequestHandler<CreateBindingTypeCommand, Unit>
+    public class CreateBindingTypeCommandHandler : RequestHandlerWithValidator<CreateBindingTypeCommand, Unit, CreateBindingTypeValidator>
     {
-        private readonly CreateBindingTypeValidator validator;
-
-        public CreateBindingTypeCommandHandler(IApplicationService service, CreateBindingTypeValidator validator) : base(service)
+        public CreateBindingTypeCommandHandler(IApplicationService service, CreateBindingTypeValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async Task<Unit> Handle(CreateBindingTypeCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateBindingTypeCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
-
             var bindingType = new BindingType
             {
                 Id = Guid.NewGuid(),

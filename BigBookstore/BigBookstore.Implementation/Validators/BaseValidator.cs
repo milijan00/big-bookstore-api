@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace BigBookstore.Implementation.Validators
 {
     public  abstract class BaseValidator<T> : AbstractValidator<T>
-        where T :class 
     {
         public BaseValidator(BigBookStoreDbContext context)
         {

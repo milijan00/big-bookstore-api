@@ -18,22 +18,13 @@ namespace BigBookstore.Implementation.BusinessLogic.Roles.Commands
         public string Name { get; set; }
     }
 
-    public class CreateRoleCommandHandler : RequestHandler<CreateRoleCommand, Unit>
+    public class CreateRoleCommandHandler : RequestHandlerWithValidator<CreateRoleCommand, Unit, CreateRoleValidator>
     {
-        private readonly CreateRoleValidator validator;
-
-        public CreateRoleCommandHandler(IApplicationService service, CreateRoleValidator validator) : base(service)
+        public CreateRoleCommandHandler(IApplicationService service, CreateRoleValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
-
-        public override async  Task<Unit> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateRoleCommand request)
         {
-            var result = validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
             var role = new Role
             {
                 Id = Guid.NewGuid(),
@@ -41,7 +32,6 @@ namespace BigBookstore.Implementation.BusinessLogic.Roles.Commands
             };
             await this.ApplicationService.CreateAsync(role);
             return new Unit();
-            
         }
     }
 }

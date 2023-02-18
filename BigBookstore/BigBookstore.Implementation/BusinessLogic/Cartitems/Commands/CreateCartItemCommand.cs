@@ -19,22 +19,14 @@ namespace BigBookstore.Implementation.BusinessLogic.Cartitems.Commands
         public uint Quantity { get; set; }
     }
 
-    public class CreateCartItemCommandHandler : RequestHandler<CreateCartItemCommand, Unit>
+    public class CreateCartItemCommandHandler : RequestHandlerWithValidator<CreateCartItemCommand, Unit, CreateCartItemValidator>
     {
-        private readonly CreateCartItemValidator validator;
-
-        public CreateCartItemCommandHandler(IApplicationService service, CreateCartItemValidator validator) : base(service)
+        public CreateCartItemCommandHandler(IApplicationService service, CreateCartItemValidator validator) : base(service, validator)
         {
-            this.validator = validator;
         }
 
-        public override async Task<Unit> Handle(CreateCartItemCommand request, CancellationToken cancellationToken)
+        protected override async Task<Unit> ExecuteOperation(CreateCartItemCommand request)
         {
-            var result = this.validator.Validate(request);
-            if (!result.IsValid)
-            {
-                throw new UnprocessableEntityException(result.Errors);
-            }
             var cartItem = new CartItem
             {
                 BookId = request.BookId,
