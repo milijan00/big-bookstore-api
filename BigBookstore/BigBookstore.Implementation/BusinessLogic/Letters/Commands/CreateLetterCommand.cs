@@ -34,6 +34,7 @@ namespace BigBookstore.Implementation.BusinessLogic.Letters.Commands
             }
             var letter = new Domain.Entities.Letter
             {
+                Id = Guid.NewGuid(),
                 Name = request.Name
             };
             await this.ApplicationService.CreateAsync(letter);

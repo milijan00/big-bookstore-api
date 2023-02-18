@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Carts.Commands
 {
     public interface IDeleteCartCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
     }
 }

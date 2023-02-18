@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Carts.Commands
 {
     public interface ICreateCartCommand : ICommand<Unit>
     {
+        public Guid UserId { get; set; }
     }
 }

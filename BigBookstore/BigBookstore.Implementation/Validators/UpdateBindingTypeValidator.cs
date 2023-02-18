@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BigBookstore.Implementation.Extensions;
 
 namespace BigBookstore.Implementation.Validators
 {
@@ -15,7 +16,7 @@ namespace BigBookstore.Implementation.Validators
         {
             RuleFor(x => x.Id)
                 .Cascade(CascadeMode.Stop)
-                .Must(x => x != Guid.Empty).WithMessage("BindingType's id is not valid.")
+                .Must(x => x.NotEmpty()).WithMessage("BindingType's id is not valid.")
                 .Must(id => Context.BindingTypes.Any(x => x.Id == id)).WithMessage("Given BrandingType doesn't exist.");
 
             RuleFor(x => x.Name)

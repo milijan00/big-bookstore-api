@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BigBookstore.Implementation.Extensions;
 
 namespace BigBookstore.Implementation.Validators
 {
@@ -15,7 +16,7 @@ namespace BigBookstore.Implementation.Validators
         {
             RuleFor(x => x.Id)
                 .Cascade(CascadeMode.Stop)
-                .Must(id => id != Guid.Empty).WithMessage("Letter's id is invalid.")
+                .Must(id => id.NotEmpty()).WithMessage("Letter's id is invalid.")
                 .Must(id => Context.Letters.Any(x => x.Id == id)).WithMessage("Given letter doens't exist.");
 
             RuleFor(x => x.Name)

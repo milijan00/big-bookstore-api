@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Authors.Queries
 {
     public interface IGetAuthorByIdQuery : IQuery<AuthorDto>
     {
+        public Guid Id { get; set; }
     }
 }

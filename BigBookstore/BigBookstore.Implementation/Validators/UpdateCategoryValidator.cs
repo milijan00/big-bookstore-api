@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BigBookstore.Implementation.Extensions;
 
 namespace BigBookstore.Implementation.Validators
 {
@@ -19,7 +20,7 @@ namespace BigBookstore.Implementation.Validators
                 .Must(name => !Context.Categories.Any(x => x.Name == name)).WithMessage("Category's name is already taken.");
             RuleFor(x => x.Id)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Category's id must not be null or empty")
+                .Must(id => id.NotEmpty()).WithMessage("Category's id must not be null or empty")
                 .Must(id => Context.Categories.Any(x => x.Id == id)).WithMessage("Given category doesn't exist.");
         }
     }

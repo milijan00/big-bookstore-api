@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Letters.Queries
 {
     public interface IGetLetterByIdQuery : IQuery<LetterDto>
     {
+        public Guid Id { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.BindingTypes.Commands
 {
     public interface IDeleteBindingTypeCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
     }
 }

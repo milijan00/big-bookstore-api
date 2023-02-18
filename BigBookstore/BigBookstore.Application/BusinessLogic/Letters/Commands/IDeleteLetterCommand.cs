@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Letters.Commands
 {
     public interface IDeleteLetterCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
     }
 }

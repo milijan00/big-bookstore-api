@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.BindingTypes.Queries
 {
     public interface IGetBindingTypeByIdQuery : IQuery<BindingTypeDto>
     {
+        public Guid Id { get; set; }
     }
 }

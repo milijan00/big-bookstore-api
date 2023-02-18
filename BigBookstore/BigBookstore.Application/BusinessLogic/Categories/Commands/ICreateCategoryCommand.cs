@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Categories.Commands
 {
     public interface ICreateCategoryCommand : ICommand<Unit>
     {
+        public string Name { get; set; }
     }
 }

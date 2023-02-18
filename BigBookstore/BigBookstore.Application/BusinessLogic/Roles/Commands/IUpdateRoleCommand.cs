@@ -9,5 +9,7 @@ namespace BigBookstore.Application.BusinessLogic.Roles.Commands
 {
     public interface IUpdateRoleCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }

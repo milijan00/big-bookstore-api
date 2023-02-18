@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Authors.Commands
 {
     public interface IDeleteAuthorCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
     }
 }

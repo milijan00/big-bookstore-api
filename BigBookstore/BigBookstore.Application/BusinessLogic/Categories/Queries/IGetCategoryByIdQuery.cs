@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Categories.Queries
 {
     public interface IGetCategoryByIdQuery : IQuery<CategoryDto>
     {
+        public Guid Id { get; set; }
     }
 }

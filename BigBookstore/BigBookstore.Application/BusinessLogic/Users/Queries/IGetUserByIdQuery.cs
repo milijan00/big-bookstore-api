@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Users.Queries
 {
     public interface IGetUserByIdQuery : IQuery<UserDto>
     {
+        public Guid Id { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Roles.Commands
 {
     public interface IDeleteRoleCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
     }
 }

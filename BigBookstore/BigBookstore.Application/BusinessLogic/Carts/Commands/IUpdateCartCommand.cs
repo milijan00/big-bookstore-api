@@ -9,5 +9,7 @@ namespace BigBookstore.Application.BusinessLogic.Carts.Commands
 {
     public interface IUpdateCartCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
+        public string Address { get; set; }
     }
 }

@@ -9,5 +9,7 @@ namespace BigBookstore.Application.BusinessLogic.Categories.Commands
 {
     public interface IUpdateCategoryCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
+        public string  Name { get; set; }
     }
 }

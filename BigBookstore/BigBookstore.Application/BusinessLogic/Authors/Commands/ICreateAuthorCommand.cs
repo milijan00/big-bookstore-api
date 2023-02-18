@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Authors.Commands
 {
     public interface ICreateAuthorCommand : ICommand<Unit>
     {
+        public string FullName { get; set; }
     }
 }

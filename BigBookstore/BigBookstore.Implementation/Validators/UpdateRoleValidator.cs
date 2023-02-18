@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BigBookstore.Implementation.Extensions;
 
 namespace BigBookstore.Implementation.Validators
 {
@@ -20,7 +21,7 @@ namespace BigBookstore.Implementation.Validators
 
             RuleFor(x => x.Id)
                 .Cascade(CascadeMode.Stop)
-                .NotNull().WithMessage("Role's id must not be null or empty")
+                .Must(id => id.NotEmpty()).WithMessage("Role's id must not be null or empty")
                 .Must(id => Context.Roles.Any(x => x.Id == id)).WithMessage("Given role doesn't exist.");
         }
     }

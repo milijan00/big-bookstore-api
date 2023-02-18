@@ -36,6 +36,7 @@ namespace BigBookstore.Implementation.BusinessLogic.BindingTypes.Commands
 
             var bindingType = new BindingType
             {
+                Id = Guid.NewGuid(),
                 Name = request.Name
             };
             await this.ApplicationService.CreateAsync<BindingType>(bindingType);

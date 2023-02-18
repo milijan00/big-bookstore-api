@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.BindingTypes.Commands
 {
     public interface ICreateBindingTypeCommand : ICommand<Unit>
     {
+        public string Name { get; set; }
     }
 }

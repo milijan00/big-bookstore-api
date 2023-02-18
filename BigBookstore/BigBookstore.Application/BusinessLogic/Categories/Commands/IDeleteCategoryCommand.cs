@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Categories.Commands
 {
     public interface IDeleteCategoryCommand : ICommand<Unit>
     {
+        public Guid Id { get; set; }
     }
 }

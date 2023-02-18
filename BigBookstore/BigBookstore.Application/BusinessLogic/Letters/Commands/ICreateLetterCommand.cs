@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Letters.Commands
 {
     public interface ICreateLetterCommand : ICommand<Unit>
     {
+        public string Name { get; set; }
     }
 }

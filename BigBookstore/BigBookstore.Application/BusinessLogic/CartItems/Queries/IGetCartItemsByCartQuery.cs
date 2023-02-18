@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.CartItems.Queries
 {
     public interface IGetCartItemsByCartQuery : IQuery<IEnumerable<CartItemDto>>
     {
+        public Guid CartId { get; set; }
     }
 }

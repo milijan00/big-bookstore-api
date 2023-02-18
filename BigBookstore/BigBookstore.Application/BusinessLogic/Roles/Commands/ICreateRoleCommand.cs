@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Roles.Commands
 {
     public interface ICreateRoleCommand : ICommand<Unit>
     {
+        public string Name { get; set; }
     }
 }

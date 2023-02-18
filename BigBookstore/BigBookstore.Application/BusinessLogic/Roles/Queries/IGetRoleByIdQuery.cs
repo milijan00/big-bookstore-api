@@ -9,5 +9,6 @@ namespace BigBookstore.Application.BusinessLogic.Roles.Queries
 {
     public interface IGetRoleByIdQuery : IQuery<RoleDto>
     {
+        public Guid Id { get; set; }
     }
 }
