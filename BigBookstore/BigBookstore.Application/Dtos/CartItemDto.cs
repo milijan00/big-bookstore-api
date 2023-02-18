@@ -9,6 +9,9 @@ namespace BigBookstore.Application.Dtos
     public class CartItemDto
     {
         public Guid BookId { get; set; }
+        public string BookName { get; set; }
+        public string Image { get; set; }
+        public uint Quantity { get; set; }
         public Guid CartId { get; set; }
     }
 }

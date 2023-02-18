@@ -17,7 +17,7 @@ namespace BigBookstore.Application.Services
         public Task CreateAsync<TEntity>(TEntity entity) where TEntity : BaseEntity;
         public Task UpdateAsync<TEntity>( Guid id, TEntity entity) where TEntity : BaseEntity;
         public Task DeleteAsync<TEntity>(Guid id) where TEntity : BaseEntity;
-        public DbSet<TEntity> Entity<TEntity>() where TEntity: BaseEntity;
+        public DbSet<TEntity> Entity<TEntity>() where TEntity: class;
         public Task SaveChangesAsync();
     }
 }

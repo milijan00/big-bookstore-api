@@ -43,7 +43,7 @@ namespace BigBookstore.Implementation.Services
             await this._context.SaveChangesAsync();
         }
 
-        public DbSet<TEntity> Entity<TEntity>() where TEntity : BaseEntity
+        public DbSet<TEntity> Entity<TEntity>() where TEntity : class
         {
             var entity = this._context.Set<TEntity>();
             if(entity == null)
