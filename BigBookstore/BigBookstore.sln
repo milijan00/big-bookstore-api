@@ -14,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBookstore.Persistance", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBookstore.Application", "BigBookstore.Application\BigBookstore.Application.csproj", "{B1B62335-00DF-4D68-94C7-4EC801DAEDDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBookstore.Implementation", "BigBookstore.Implementation\BigBookstore.Implementation.csproj", "{BC7E801A-0592-4F03-9BB7-3A3B1827CF9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigBookstore.Implementation", "BigBookstore.Implementation\BigBookstore.Implementation.csproj", "{BC7E801A-0592-4F03-9BB7-3A3B1827CF9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBookstore.API", "BigBookstore.API\BigBookstore.API.csproj", "{48B0BEBD-0F3D-4CC8-8AAA-528FD85CB56A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{BC7E801A-0592-4F03-9BB7-3A3B1827CF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC7E801A-0592-4F03-9BB7-3A3B1827CF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC7E801A-0592-4F03-9BB7-3A3B1827CF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B0BEBD-0F3D-4CC8-8AAA-528FD85CB56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B0BEBD-0F3D-4CC8-8AAA-528FD85CB56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B0BEBD-0F3D-4CC8-8AAA-528FD85CB56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B0BEBD-0F3D-4CC8-8AAA-528FD85CB56A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
