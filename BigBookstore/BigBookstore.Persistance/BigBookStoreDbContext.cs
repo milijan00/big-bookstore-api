@@ -18,6 +18,7 @@ namespace BigBookstore.Persistance
         public DbSet<BindingType> BindingTypes { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Letter> Letters { get; set; }
+        public DbSet<LoggedException> LoggedExceptions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,7 +30,11 @@ namespace BigBookstore.Persistance
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
             modelBuilder.Entity<CartItem>().HasKey(x => new { x.BookId, x.CartId });
             modelBuilder.Entity<CartItem>().Property(x => x.Quantity).IsRequired().HasDefaultValue(1);
-
+            modelBuilder.Entity<LoggedException>().HasKey(x => x.Id);
+            modelBuilder.Entity<LoggedException>().Property(x => x.Message).IsRequired();
+            modelBuilder.Entity<LoggedException>().Property(x => x.StackTrace).IsRequired();
+            modelBuilder.Entity<LoggedException>().Property(x => x.CreatedOn).HasDefaultValueSql("GETDATE()").IsRequired();
+            modelBuilder.Entity<LoggedException>().Property(x => x.IsSolved).HasDefaultValue(false).IsRequired();
             base.OnModelCreating(modelBuilder);
         }
         public async  override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

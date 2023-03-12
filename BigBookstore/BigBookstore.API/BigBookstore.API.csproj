@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BigBookstore.Application\BigBookstore.Application.csproj" />
+    <ProjectReference Include="..\BigBookstore.Domain\BigBookstore.Domain.csproj" />
+    <ProjectReference Include="..\BigBookstore.Implementation\BigBookstore.Implementation.csproj" />
+    <ProjectReference Include="..\BigBookstore.Persistance\BigBookstore.Persistance.csproj" />
   </ItemGroup>
 
 </Project>
